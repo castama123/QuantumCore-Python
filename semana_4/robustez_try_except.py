@@ -73,7 +73,7 @@ def leer_y_procesar_transacciones(nombre_archivo: str):
                     lista_transacciones_validas.append(nueva_transaccion)
                     print(f"[OK] Línea {linea_num}: Procesada con éxito.")
                 
-                # --- ATRAPAR ERRORES ESPECÍFICOS ---
+                # --- ATRAPAR ERRORES ESPECÍFICOS -----
                 
                 except ValueError as e:
                     # Atrapa errores de conversión ('texto_invalido' a float) 
