@@ -1,0 +1,50 @@
+// AHORA (POO): La lógica y los datos están UNIDOS en el objeto.
+
+// -------------------------------------------------------------
+// 1. DEFINICIÓN DE LA CLASE (El Molde)
+// -------------------------------------------------------------
+CLASE Transaccion:
+
+    // 2. CONSTRUCTOR: UNE los datos dispersos como ATRIBUTOS
+    // Habilidad: Encapsulamiento Inicial
+    MÉTODO constructor(self, cliente_id, tipo, monto):
+        self.cliente_id = cliente_id   // Atributo
+        self.tipo = tipo               // Atributo
+        self.monto = monto             // Atributo
+    FIN MÉTODO constructor
+
+    // 3. MÉTODO (Comportamiento): Reemplaza una función externa de PE
+    // Habilidad: Mover lógica dentro del objeto
+    MÉTODO obtener_informacion(self):
+        RETORNAR "Cliente: " + self.cliente_id + " Tipo: " + self.tipo
+    FIN MÉTODO
+
+// -------------------------------------------------------------
+// 4. FUNCIÓN DE ORQUESTACIÓN (Punto de Entrada)
+// -------------------------------------------------------------
+FUNCIÓN ejecutar_refactorizacion():
+    NOMBRE_ARCHIVO = "transacciones.txt"
+    DEFINIR lista_objetos COMO LISTA
+    
+    // Abrir y leer el archivo (similar a la Semana 1)
+    ABRIR NOMBRE_ARCHIVO PARA LECTURA
+        POR CADA linea EN archivo HACER
+            partes = DIVIDIR(linea, ',') 
+            
+            SI CANTIDAD(partes) ES IGUAL A 3 ENTONCES
+                // *Punto Clave:* CREAR OBJETO en lugar de Diccionario
+                NUEVO_OBJETO = CREAR Transaccion(partes[0], partes[1], partes[2])
+                AGREGAR NUEVO_OBJETO A lista_objetos
+            FIN SI
+        FIN POR CADA
+    CERRAR ARCHIVO
+    
+    // Demostración: Llamar al MÉTODO del Objeto
+    POR CADA objeto EN lista_objetos HACER
+        IMPRIMIR objeto.obtener_informacion()
+    FIN POR CADA
+
+FIN FUNCIÓN
+
+// INICIO
+LLAMAR ejecutar_refactorizacion()
